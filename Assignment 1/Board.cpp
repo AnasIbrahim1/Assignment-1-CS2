@@ -44,9 +44,9 @@ int Board::getBoardSize() {
 	return boardSize;
 }
 
-void inputCoordinates(int& x, int& y, const int& size) { // same function as in main.cpp
+void inputCoordinates2(int& x, int& y, const int& size) { // same function as in main.cpp
 	while (true) {
-		cout << "Enter the coordinates of the cat (separated by spaces): ";
+		cout << "Enter the coordinates of the animal (separated by spaces): ";
 		cin >> x >> y;
 		x--; y--; // decrement because the array is zero-indexed
 		if (x >= size || y >= size || x < 0 || y < 0) // validate the user input
@@ -69,10 +69,8 @@ void Board::initializeAnimals(const int& size) {
 	for (int i = 0; i < numAnimals; i++) {
 		cout << "Enter the name of the animal: ";
 		cin >> tmpo;
-		cout << "Enter the coordinates of the animal (separated by spaces): ";
-		inputCoordinates(x1, y1, boardSize);
+		inputCoordinates2(x1, y1, boardSize);
 		cout << endl;
-		x1--; y1--; // decrement because the array is zero-indexed
 		Animal tmp(x1, y1); // a temporary variable takes x1 and y1 as its coordinates
 		*(Animals + i) = tmp; // and then initialize the ith element in the 
 		(*(Animals + i)).setName(tmpo); // and then set the animal name
