@@ -5,6 +5,17 @@
 #include "Board.h"
 using namespace std;
 // by Anas A. Ibrahim, commenting and everything
+/*
+the coordinates are assuming that (1,1) is the upperleft corner, and that (size,size) is
+the lower-right corner, as so
+(1,1)		(1,2)		(1,3)		...     (1,size)
+(2,1)		(2,2)		(2,3)		...     (2,size)
+(3,1)		(3,2)		(3,3)		...     (3,size)
+.			.			.			.		.
+(size,1)	(size,2)	(size,3)	...     (size,size)
+
+but since the arrays are zero indexed, we will decrement the input of the coordinates as we go
+*/
 
 void inputSize(int&);
 void inputCoordinates(int&, int&, const int&);
@@ -25,17 +36,18 @@ int main() {
 	ifstream st;
 	st.open("Animals.txt");
 	string x;
-	bool flag; // flag for detection of something after the loop
+	bool flag; // flag for detection of something during the loop
 	// assuming that the number of animals is the same as the number of strings
 	int len, tmpX, tmpY;
 	for (int i = 0; i < numAnimals; i++) {
 		st >> x;
 		// go through the string, and move the animal according to the string
 		len = x.length();
-		cout << (*(arr + i)).getName() << ": ";
+		cout << (*(arr + i)).getName() << ": "; 
+		// outputting the name of the animal to put the result next to the animal
 		flag = true;
-		for (int j = 0; j < len; j++) {
-			if (!((*(arr + i)).move(x[j], size))) {
+		for (int j = 0; j < len; j++) { // for loop for iterating through the string
+			if (!((*(arr + i)).move(x[j], size))) { // if the move wasn't valid, out of bounds
 				cout << "Drowned outside the island." << endl;
 				flag = false;
 				break;
@@ -73,7 +85,7 @@ void inputSize(int& size) {
 	}
 }
 
-void inputCoordinates(int& x, int& y, const int& size) {
+void inputCoordinates(int& x, int& y, const int& size) { 
 	while (true) {
 		cout << "Enter the coordinates of the cat (separated by spaces): ";
 		cin >> x >> y;
